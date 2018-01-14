@@ -5,7 +5,7 @@ import Payments from './Payments';
 class Header extends Component{
 
   renderContent() {
-      switch(this.props.auth.auth) {
+      switch(this.props.trance.auth) {
         case null:
         return;
         case false:
@@ -16,17 +16,19 @@ class Header extends Component{
         default:
         return[
           <li key="1"><Payments /></li>,
-          <li key="2"><a href='/api/logout'>Logout </a></li>
+          <li key="3" style={{margin: '0 10px'}}>
+            Credits:{this.props.trance.credits}
+          </li>,
+            <li key="2"><a href='/api/logout'>Logout </a></li>
         ];
       }
   }
-
 
   render() {
     return(
       <nav>
         <div className="nav-wrapper">
-          <Link to={this.props.auth ? '/surveys' : '/'}
+          <Link to={this.props.trance ? '/surveys' : '/'}
             className="left brand-logo"
             >
             Emaily
@@ -40,8 +42,9 @@ class Header extends Component{
   }
 };
 
-function mapStateToProps(auth) {
-  return {auth};
+
+function mapStateToProps(trance) {
+  return {trance};
 }
 
 export default  connect(mapStateToProps)(Header);
